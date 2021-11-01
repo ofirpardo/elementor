@@ -7,14 +7,15 @@ const config = {
   globalTimeout: 900000,
   reporter: 'list',
   testDir: '../sanity',
+  testMatch: 'image.test.js',
   globalSetup: require.resolve('./global-setup'),
-  retries:1,
+  // retries:1,
   use: {
-    headless: true,
+    headless: false,
     storageState: './tests/playwright/config/storageState.json',
-    baseURL:'http://localhost:8888/',
+    baseURL:'http://test.local/',
     viewport: { width: 1440, height: 960 },
-    video: 'on-first-retry',
+    // video: 'on-first-retry',
   },
 };
 

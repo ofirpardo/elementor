@@ -14,8 +14,9 @@ exports.wpAdminPage = class wpAdminPage {
   async login() {
     const loggedIn = await this.page.$("text=Dashboard");
     if(loggedIn) {
-      return
+      return;
     }
+    
     await this.page.waitForSelector("text=Log In");
     await this.page.fill('input[name="log"]', "admin");
     await this.page.fill('input[name="pwd"]', "password");
