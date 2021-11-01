@@ -84,3 +84,8 @@ jobs:
       - name: Run Playwright tests
         run: |
           npm run test:playwright
+      - uses: actions/upload-artifact@v2
+        with:
+          name: playwright-test-results
+          path: test-results/
+          retention-days: 14
