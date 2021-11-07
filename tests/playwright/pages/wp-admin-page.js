@@ -1,17 +1,17 @@
-const { addWidget } = require('../assets/addWidget')
 exports.wpAdminPage = class wpAdminPage {
   /**
    * @param {import('@playwright/test').Page} page
    */
-  constructor(page) {
+  constructor( page ) {
     this.page = page;
   }
 
   async goto() {
-    await this.page.goto("/wp-admin");
+    await this.page.goto( '/wp-admin' );
   }
 
   async login() {
+<<<<<<< HEAD
     const loggedIn = await this.page.$("text=Dashboard");
     if(loggedIn) {
       return;
@@ -22,33 +22,44 @@ exports.wpAdminPage = class wpAdminPage {
     await this.page.fill('input[name="pwd"]', "password");
     await this.page.click("text=Log In");
     await this.page.waitForSelector("text=Dashboard");
+=======
+    const loggedIn = await this.page.$( 'text=Dashboard' );
+    if ( loggedIn ) {
+      return;
+    }
+    await this.page.waitForSelector( 'text=Log In' );
+    await this.page.fill( 'input[name="log"]', 'admin' );
+    await this.page.fill( 'input[name="pwd"]', 'password' );
+    await this.page.click( 'text=Log In' );
+    await this.page.waitForSelector( 'text=Dashboard' );
+>>>>>>> 953902f926d5493b159450613a1e702227eb2235
   }
 
   async openNewPage() {
     try {
-      await this.page.click('text=Create New Page', {timeout: 5000});
-    } catch (err) {
-      console.error("Click on Elementor 'Create New Page' button failed");
-      await this.page.waitForSelector("text=Dashboard");
-      await this.page.click("text=Pages"),
-        await Promise.all([
-          this.page.waitForNavigation({ url: '/wp-admin/post-new.php?post_type=page' }),
-          this.page.click('div[role="main"] >> text=Add New'),
-        ]);
-      await Promise.all([
+      await this.page.click( 'text=Create New Page', { timeout: 5000 } );
+    } catch ( err ) {
+      console.error( "Click on Elementor 'Create New Page' button failed" );
+      await this.page.waitForSelector( 'text=Dashboard' );
+      await this.page.click( 'text=Pages' );
+      await Promise.all( [
+        this.page.waitForNavigation( { url: '/wp-admin/post-new.php?post_type=page' } ),
+        this.page.click( 'div[role="main"] >> text=Add New' ),
+      ] );
+      await Promise.all( [
         this.page.waitForNavigation(),
         this.skipTutorial(),
-        this.page.click("text=← Back to WordPress Editor Edit with Elementor"),
-      ]);
+        this.page.click( 'text=← Back to WordPress Editor Edit with Elementor' ),
+      ] );
     }
-    await this.page.waitForSelector("#elementor-panel-header-title");
+    await this.page.waitForSelector( '#elementor-panel-header-title' );
   }
 
   async skipTutorial() {
-    await this.page.waitForTimeout(1000);
-    const next = await this.page.$("text='Next'");
-    if (next) {
-      await this.page.click('[aria-label="Close dialog"]');
+    await this.page.waitForTimeout( 1000 );
+    const next = await this.page.$( "text='Next'" );
+    if ( next ) {
+      await this.page.click( '[aria-label="Close dialog"]' );
     }
   }
 
@@ -57,5 +68,4 @@ exports.wpAdminPage = class wpAdminPage {
     await this.login();
     await this.openNewPage();
   }
-
 };
