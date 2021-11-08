@@ -11,18 +11,6 @@ exports.wpAdminPage = class wpAdminPage {
   }
 
   async login() {
-<<<<<<< HEAD
-    const loggedIn = await this.page.$("text=Dashboard");
-    if(loggedIn) {
-      return;
-    }
-    
-    await this.page.waitForSelector("text=Log In");
-    await this.page.fill('input[name="log"]', "admin");
-    await this.page.fill('input[name="pwd"]', "password");
-    await this.page.click("text=Log In");
-    await this.page.waitForSelector("text=Dashboard");
-=======
     const loggedIn = await this.page.$( 'text=Dashboard' );
     if ( loggedIn ) {
       return;
@@ -32,7 +20,6 @@ exports.wpAdminPage = class wpAdminPage {
     await this.page.fill( 'input[name="pwd"]', 'password' );
     await this.page.click( 'text=Log In' );
     await this.page.waitForSelector( 'text=Dashboard' );
->>>>>>> 953902f926d5493b159450613a1e702227eb2235
   }
 
   async openNewPage() {

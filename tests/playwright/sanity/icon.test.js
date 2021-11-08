@@ -34,7 +34,7 @@ test('Icon widget sanity test', async ({ page }) => {
   await page.click('text=Style');
   await page.fill('input[type="number"]', width);
   // Wait for animation
-  await page.waitForTimeout(1000)
+  await page.waitForTimeout(1000);
   icon = await editor.previewFrame.waitForSelector('i.fa-surprise');
   style = await getComputedStyle(icon,'')
   expect(style.fontSize).toBe(`${width}px`);

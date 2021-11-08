@@ -23,8 +23,8 @@ test( 'Image widget sanity test', async ( { page } ) => {
     await page.waitForSelector( 'text=Showing 1 of 1 media items' );
   }
 
-  //await page.click( '.button.media-button' );
-  //const img = await editor.previewFrame.waitForSelector( 'img' );
-  //const src = await img.getAttribute( 'src' );
+  await page.click( '.button.media-button' );
+  const img = await editor.previewFrame.waitForSelector( 'img' );
+  const src = await img.getAttribute( 'src' );
   expect( src ).toContain( '.jpeg' );
 } );
